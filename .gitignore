@@ -1,4 +1,5 @@
 # binaries
+/scratch
 *.exe
 *.dll
 *.so
@@ -19,3 +20,6 @@ go.work.sum
 
 # environment files
 .env
+
+# local tool caches
+/.cache/

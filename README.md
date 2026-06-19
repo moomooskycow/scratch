@@ -24,3 +24,19 @@ sudo ln -s $HOME/go/bin/scratch /usr/local/bin/scratch
 
 - simply type `scratch` in your terminal
 - your scratchpads are in `~/documents/rubberducks/YYYYMMDD-scratch.md`
+
+## ci
+
+The host-agnostic repository gate is:
+
+```bash
+./scripts/ci.sh
+```
+
+It checks `gofmt`, runs `go vet`, executes race-enabled tests with a
+`coverage.out` profile, and builds the CLI. GitHub Actions delegates to this
+same script. To install local hooks:
+
+```bash
+git config core.hooksPath .githooks
+```
