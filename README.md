@@ -24,3 +24,14 @@ sudo ln -s $HOME/go/bin/scratch /usr/local/bin/scratch
 
 - simply type `scratch` in your terminal
 - your scratchpads are in `~/documents/rubberducks/YYYYMMDD-scratch.md`
+
+## development
+
+Run the repo-owned gate before merging:
+
+```bash
+make check
+```
+
+CI uses the same command in the `go check` job. The separate Leyline workflow
+only vendors shared docs; it does not replace the Go gate.
