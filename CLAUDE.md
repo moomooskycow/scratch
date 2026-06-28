@@ -5,6 +5,7 @@
 - Run app: `scratch`
 - Format code: `go fmt ./...`
 - Run tests: `go test ./...`
+- Verify everything: `make check`
 - Run specific test: `go test -run TestName`
 - Lint: `golangci-lint run`
 
