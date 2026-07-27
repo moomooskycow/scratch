@@ -30,8 +30,9 @@ func main() {
 		os.Exit(1)
 	}
 
-	// define or discover the base scratch directory
-	scratchPath := filepath.Join(home, "Documents", "rubberducks")
+	// scratch notes live in the daybook vault (git-versioned, not iCloud —
+	// iCloud eviction made first-run-of-day block ~60s on a cloud download)
+	scratchPath := filepath.Join(home, "Development", "daybook", "rubberducks")
 
 	// generate today's filename
 	todayName := time.Now().Format("20060102") + scratchExt
