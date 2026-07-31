@@ -1,0 +1,42 @@
+{
+  "catalog_version": "glance-catalog-001",
+  "context_blocks": [
+    {
+      "byte_size": 277,
+      "name": "Repository"
+    },
+    {
+      "byte_size": 513,
+      "name": "Navigation"
+    },
+    {
+      "byte_size": 209,
+      "name": "File signatures"
+    },
+    {
+      "byte_size": 637,
+      "name": "Local file contents"
+    },
+    {
+      "byte_size": 35423,
+      "name": "Child pages"
+    },
+    {
+      "byte_size": 20,
+      "name": "Parent chain"
+    }
+  ],
+  "degraded_children": [],
+  "directory": ".github",
+  "input_tokens": 17124,
+  "kind": "interior",
+  "metadata_notes": [],
+  "model": "anthropic/claude-sonnet-5-20260630",
+  "output_tokens": 1914,
+  "prompt_version": "glance-007-interior-v1",
+  "provider": "openrouter",
+  "retries": 0,
+  "source_sha": "fb1486f210885ae663338ebfab4e70210abc4809",
+  "spend_micros": 53388,
+  "tier": "Mid"
+}

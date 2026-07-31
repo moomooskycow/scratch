@@ -1,0 +1,774 @@
+{
+  "failed_pages": [],
+  "pages": [
+    {
+      "catalog_version": "glance-catalog-001",
+      "context_blocks": [
+        {
+          "byte_size": 288,
+          "name": "Repository"
+        },
+        {
+          "byte_size": 289,
+          "name": "Navigation"
+        },
+        {
+          "byte_size": 524,
+          "name": "File signatures"
+        },
+        {
+          "byte_size": 2433,
+          "name": "Local file contents"
+        },
+        {
+          "byte_size": 30,
+          "name": "Parent chain"
+        },
+        {
+          "byte_size": 39,
+          "name": "Sibling directory names"
+        }
+      ],
+      "directory": ".github/ISSUE_TEMPLATE",
+      "image": {
+        "failed": 0,
+        "files": [],
+        "rendered": 0,
+        "requested": 0,
+        "skipped": 0,
+        "spend_micros": 0
+      },
+      "input_tokens": 2325,
+      "kind": "leaf",
+      "model": "deepseek/deepseek-v4-flash-20260423",
+      "output_tokens": 1076,
+      "params": {
+        "max_tokens": 6000,
+        "output_contract": "json_object/glance-catalog-001",
+        "temperature": null
+      },
+      "prompt_version": "glance-007-leaf-v1",
+      "provider": "openrouter",
+      "retries": 0,
+      "spend_micros": 502
+    },
+    {
+      "catalog_version": "glance-catalog-001",
+      "context_blocks": [
+        {
+          "byte_size": 283,
+          "name": "Repository"
+        },
+        {
+          "byte_size": 289,
+          "name": "Navigation"
+        },
+        {
+          "byte_size": 148,
+          "name": "File signatures"
+        },
+        {
+          "byte_size": 12591,
+          "name": "Local file contents"
+        },
+        {
+          "byte_size": 30,
+          "name": "Parent chain"
+        },
+        {
+          "byte_size": 44,
+          "name": "Sibling directory names"
+        }
+      ],
+      "directory": ".github/workflows",
+      "image": {
+        "failed": 0,
+        "files": [],
+        "rendered": 0,
+        "requested": 0,
+        "skipped": 0,
+        "spend_micros": 0
+      },
+      "input_tokens": 10889,
+      "kind": "leaf",
+      "model": "deepseek/deepseek-v4-flash-20260423",
+      "output_tokens": 1979,
+      "params": {
+        "max_tokens": 6000,
+        "output_contract": "json_object/glance-catalog-001",
+        "temperature": null
+      },
+      "prompt_version": "glance-007-leaf-v1",
+      "provider": "openrouter",
+      "retries": 1,
+      "spend_micros": 1328
+    },
+    {
+      "catalog_version": "glance-catalog-001",
+      "context_blocks": [
+        {
+          "byte_size": 284,
+          "name": "Repository"
+        },
+        {
+          "byte_size": 244,
+          "name": "Navigation"
+        },
+        {
+          "byte_size": 554,
+          "name": "File signatures"
+        },
+        {
+          "byte_size": 14281,
+          "name": "Local file contents"
+        },
+        {
+          "byte_size": 30,
+          "name": "Parent chain"
+        },
+        {
+          "byte_size": 32,
+          "name": "Sibling directory names"
+        }
+      ],
+      "directory": "contrib/completion",
+      "image": {
+        "failed": 0,
+        "files": [],
+        "rendered": 0,
+        "requested": 0,
+        "skipped": 0,
+        "spend_micros": 0
+      },
+      "input_tokens": 5824,
+      "kind": "leaf",
+      "model": "deepseek/deepseek-v4-flash-20260423",
+      "output_tokens": 995,
+      "params": {
+        "max_tokens": 6000,
+        "output_contract": "json_object/glance-catalog-001",
+        "temperature": null
+      },
+      "prompt_version": "glance-007-leaf-v1",
+      "provider": "openrouter",
+      "retries": 0,
+      "spend_micros": 876
+    },
+    {
+      "catalog_version": "glance-catalog-001",
+      "context_blocks": [
+        {
+          "byte_size": 274,
+          "name": "Repository"
+        },
+        {
+          "byte_size": 285,
+          "name": "Navigation"
+        },
+        {
+          "byte_size": 751,
+          "name": "File signatures"
+        },
+        {
+          "byte_size": 24403,
+          "name": "Local file contents"
+        },
+        {
+          "byte_size": 26,
+          "name": "Parent chain"
+        },
+        {
+          "byte_size": 42,
+          "name": "Sibling directory names"
+        }
+      ],
+      "directory": "src/exec",
+      "image": {
+        "failed": 0,
+        "files": [],
+        "rendered": 0,
+        "requested": 0,
+        "skipped": 0,
+        "spend_micros": 0
+      },
+      "input_tokens": 9682,
+      "kind": "leaf",
+      "model": "deepseek/deepseek-v4-flash-20260423",
+      "output_tokens": 1911,
+      "params": {
+        "max_tokens": 6000,
+        "output_contract": "json_object/glance-catalog-001",
+        "temperature": null
+      },
+      "prompt_version": "glance-007-leaf-v1",
+      "provider": "openrouter",
+      "retries": 0,
+      "spend_micros": 1328
+    },
+    {
+      "catalog_version": "glance-catalog-001",
+      "context_blocks": [
+        {
+          "byte_size": 276,
+          "name": "Repository"
+        },
+        {
+          "byte_size": 285,
+          "name": "Navigation"
+        },
+        {
+          "byte_size": 778,
+          "name": "File signatures"
+        },
+        {
+          "byte_size": 23765,
+          "name": "Local file contents"
+        },
+        {
+          "byte_size": 26,
+          "name": "Parent chain"
+        },
+        {
+          "byte_size": 40,
+          "name": "Sibling directory names"
+        }
+      ],
+      "directory": "src/filter",
+      "image": {
+        "failed": 0,
+        "files": [],
+        "rendered": 0,
+        "requested": 0,
+        "skipped": 0,
+        "spend_micros": 0
+      },
+      "input_tokens": 9032,
+      "kind": "leaf",
+      "model": "deepseek/deepseek-v4-flash-20260423",
+      "output_tokens": 1639,
+      "params": {
+        "max_tokens": 6000,
+        "output_contract": "json_object/glance-catalog-001",
+        "temperature": null
+      },
+      "prompt_version": "glance-007-leaf-v1",
+      "provider": "openrouter",
+      "retries": 0,
+      "spend_micros": 1724
+    },
+    {
+      "catalog_version": "glance-catalog-001",
+      "context_blocks": [
+        {
+          "byte_size": 273,
+          "name": "Repository"
+        },
+        {
+          "byte_size": 285,
+          "name": "Navigation"
+        },
+        {
+          "byte_size": 464,
+          "name": "File signatures"
+        },
+        {
+          "byte_size": 15291,
+          "name": "Local file contents"
+        },
+        {
+          "byte_size": 26,
+          "name": "Parent chain"
+        },
+        {
+          "byte_size": 43,
+          "name": "Sibling directory names"
+        }
+      ],
+      "directory": "src/fmt",
+      "image": {
+        "failed": 0,
+        "files": [],
+        "rendered": 0,
+        "requested": 0,
+        "skipped": 0,
+        "spend_micros": 0
+      },
+      "input_tokens": 7231,
+      "kind": "leaf",
+      "model": "deepseek/deepseek-v4-flash-20260423",
+      "output_tokens": 1878,
+      "params": {
+        "max_tokens": 6000,
+        "output_contract": "json_object/glance-catalog-001",
+        "temperature": null
+      },
+      "prompt_version": "glance-007-leaf-v1",
+      "provider": "openrouter",
+      "retries": 0,
+      "spend_micros": 1081
+    },
+    {
+      "catalog_version": "glance-catalog-001",
+      "context_blocks": [
+        {
+          "byte_size": 279,
+          "name": "Repository"
+        },
+        {
+          "byte_size": 230,
+          "name": "Navigation"
+        },
+        {
+          "byte_size": 738,
+          "name": "File signatures"
+        },
+        {
+          "byte_size": 13566,
+          "name": "Local file contents"
+        },
+        {
+          "byte_size": 28,
+          "name": "Parent chain"
+        },
+        {
+          "byte_size": 32,
+          "name": "Sibling directory names"
+        }
+      ],
+      "directory": "tests/testenv",
+      "image": {
+        "failed": 0,
+        "files": [],
+        "rendered": 0,
+        "requested": 0,
+        "skipped": 0,
+        "spend_micros": 0
+      },
+      "input_tokens": 5242,
+      "kind": "leaf",
+      "model": "deepseek/deepseek-v4-flash-20260423",
+      "output_tokens": 1188,
+      "params": {
+        "max_tokens": 6000,
+        "output_contract": "json_object/glance-catalog-001",
+        "temperature": null
+      },
+      "prompt_version": "glance-007-leaf-v1",
+      "provider": "openrouter",
+      "retries": 0,
+      "spend_micros": 1067
+    },
+    {
+      "catalog_version": "glance-catalog-001",
+      "context_blocks": [
+        {
+          "byte_size": 272,
+          "name": "Repository"
+        },
+        {
+          "byte_size": 416,
+          "name": "Navigation"
+        },
+        {
+          "byte_size": 195,
+          "name": "File signatures"
+        },
+        {
+          "byte_size": 501,
+          "name": "Local file contents"
+        },
+        {
+          "byte_size": 20,
+          "name": "Parent chain"
+        },
+        {
+          "byte_size": 77,
+          "name": "Sibling directory names"
+        }
+      ],
+      "directory": ".cargo",
+      "image": {
+        "failed": 0,
+        "files": [],
+        "rendered": 0,
+        "requested": 0,
+        "skipped": 0,
+        "spend_micros": 0
+      },
+      "input_tokens": 1699,
+      "kind": "leaf",
+      "model": "deepseek/deepseek-v4-flash-20260423",
+      "output_tokens": 739,
+      "params": {
+        "max_tokens": 6000,
+        "output_contract": "json_object/glance-catalog-001",
+        "temperature": null
+      },
+      "prompt_version": "glance-007-leaf-v1",
+      "provider": "openrouter",
+      "retries": 0,
+      "spend_micros": 356
+    },
+    {
+      "catalog_version": "glance-catalog-001",
+      "context_blocks": [
+        {
+          "byte_size": 277,
+          "name": "Repository"
+        },
+        {
+          "byte_size": 513,
+          "name": "Navigation"
+        },
+        {
+          "byte_size": 209,
+          "name": "File signatures"
+        },
+        {
+          "byte_size": 637,
+          "name": "Local file contents"
+        },
+        {
+          "byte_size": 35423,
+          "name": "Child pages"
+        },
+        {
+          "byte_size": 20,
+          "name": "Parent chain"
+        }
+      ],
+      "directory": ".github",
+      "image": {
+        "failed": 0,
+        "files": [],
+        "rendered": 0,
+        "requested": 0,
+        "skipped": 0,
+        "spend_micros": 0
+      },
+      "input_tokens": 17124,
+      "kind": "interior",
+      "model": "anthropic/claude-sonnet-5-20260630",
+      "output_tokens": 1914,
+      "params": {
+        "max_tokens": 10000,
+        "output_contract": "json_object/glance-catalog-001",
+        "temperature": null
+      },
+      "prompt_version": "glance-007-interior-v1",
+      "provider": "openrouter",
+      "retries": 0,
+      "spend_micros": 53388
+    },
+    {
+      "catalog_version": "glance-catalog-001",
+      "context_blocks": [
+        {
+          "byte_size": 277,
+          "name": "Repository"
+        },
+        {
+          "byte_size": 452,
+          "name": "Navigation"
+        },
+        {
+          "byte_size": 24,
+          "name": "File signatures"
+        },
+        {
+          "byte_size": 28,
+          "name": "Local file contents"
+        },
+        {
+          "byte_size": 17436,
+          "name": "Child pages"
+        },
+        {
+          "byte_size": 20,
+          "name": "Parent chain"
+        }
+      ],
+      "directory": "contrib",
+      "image": {
+        "failed": 0,
+        "files": [],
+        "rendered": 0,
+        "requested": 0,
+        "skipped": 0,
+        "spend_micros": 0
+      },
+      "input_tokens": 9448,
+      "kind": "interior",
+      "model": "anthropic/claude-sonnet-5-20260630",
+      "output_tokens": 789,
+      "params": {
+        "max_tokens": 10000,
+        "output_contract": "json_object/glance-catalog-001",
+        "temperature": null
+      },
+      "prompt_version": "glance-007-interior-v1",
+      "provider": "openrouter",
+      "retries": 0,
+      "spend_micros": 26786
+    },
+    {
+      "catalog_version": "glance-catalog-001",
+      "context_blocks": [
+        {
+          "byte_size": 269,
+          "name": "Repository"
+        },
+        {
+          "byte_size": 416,
+          "name": "Navigation"
+        },
+        {
+          "byte_size": 1421,
+          "name": "File signatures"
+        },
+        {
+          "byte_size": 119866,
+          "name": "Local file contents"
+        },
+        {
+          "byte_size": 20,
+          "name": "Parent chain"
+        },
+        {
+          "byte_size": 80,
+          "name": "Sibling directory names"
+        }
+      ],
+      "directory": "doc",
+      "image": {
+        "failed": 0,
+        "files": [],
+        "rendered": 0,
+        "requested": 0,
+        "skipped": 0,
+        "spend_micros": 0
+      },
+      "input_tokens": 100474,
+      "kind": "leaf",
+      "model": "deepseek/deepseek-v4-flash-20260423",
+      "output_tokens": 2799,
+      "params": {
+        "max_tokens": 6000,
+        "output_contract": "json_object/glance-catalog-001",
+        "temperature": null
+      },
+      "prompt_version": "glance-007-leaf-v1",
+      "provider": "openrouter",
+      "retries": 1,
+      "spend_micros": 14851
+    },
+    {
+      "catalog_version": "glance-catalog-001",
+      "context_blocks": [
+        {
+          "byte_size": 273,
+          "name": "Repository"
+        },
+        {
+          "byte_size": 416,
+          "name": "Navigation"
+        },
+        {
+          "byte_size": 421,
+          "name": "File signatures"
+        },
+        {
+          "byte_size": 7343,
+          "name": "Local file contents"
+        },
+        {
+          "byte_size": 20,
+          "name": "Parent chain"
+        },
+        {
+          "byte_size": 76,
+          "name": "Sibling directory names"
+        }
+      ],
+      "directory": "scripts",
+      "image": {
+        "failed": 0,
+        "files": [],
+        "rendered": 0,
+        "requested": 0,
+        "skipped": 0,
+        "spend_micros": 0
+      },
+      "input_tokens": 10020,
+      "kind": "leaf",
+      "model": "deepseek/deepseek-v4-flash-20260423",
+      "output_tokens": 3282,
+      "params": {
+        "max_tokens": 6000,
+        "output_contract": "json_object/glance-catalog-001",
+        "temperature": null
+      },
+      "prompt_version": "glance-007-leaf-v1",
+      "provider": "openrouter",
+      "retries": 1,
+      "spend_micros": 1983
+    },
+    {
+      "catalog_version": "glance-catalog-001",
+      "context_blocks": [
+        {
+          "byte_size": 273,
+          "name": "Repository"
+        },
+        {
+          "byte_size": 516,
+          "name": "Navigation"
+        },
+        {
+          "byte_size": 3283,
+          "name": "File signatures"
+        },
+        {
+          "byte_size": 141580,
+          "name": "Local file contents"
+        },
+        {
+          "byte_size": 61666,
+          "name": "Child pages"
+        },
+        {
+          "byte_size": 20,
+          "name": "Parent chain"
+        }
+      ],
+      "directory": "src",
+      "image": {
+        "failed": 0,
+        "files": [],
+        "rendered": 0,
+        "requested": 0,
+        "skipped": 0,
+        "spend_micros": 0
+      },
+      "input_tokens": 361088,
+      "kind": "interior",
+      "model": "anthropic/claude-sonnet-5-20260630",
+      "output_tokens": 21695,
+      "params": {
+        "max_tokens": 10000,
+        "output_contract": "json_object/glance-catalog-001",
+        "temperature": null
+      },
+      "prompt_version": "glance-007-interior-v1",
+      "provider": "openrouter",
+      "retries": 3,
+      "spend_micros": 939126
+    },
+    {
+      "catalog_version": "glance-catalog-001",
+      "context_blocks": [
+        {
+          "byte_size": 275,
+          "name": "Repository"
+        },
+        {
+          "byte_size": 444,
+          "name": "Navigation"
+        },
+        {
+          "byte_size": 140,
+          "name": "File signatures"
+        },
+        {
+          "byte_size": 82265,
+          "name": "Local file contents"
+        },
+        {
+          "byte_size": 19112,
+          "name": "Child pages"
+        },
+        {
+          "byte_size": 20,
+          "name": "Parent chain"
+        }
+      ],
+      "directory": "tests",
+      "image": {
+        "failed": 0,
+        "files": [],
+        "rendered": 0,
+        "requested": 0,
+        "skipped": 0,
+        "spend_micros": 0
+      },
+      "input_tokens": 98987,
+      "kind": "interior",
+      "model": "anthropic/claude-sonnet-5-20260630",
+      "output_tokens": 5154,
+      "params": {
+        "max_tokens": 10000,
+        "output_contract": "json_object/glance-catalog-001",
+        "temperature": null
+      },
+      "prompt_version": "glance-007-interior-v1",
+      "provider": "openrouter",
+      "retries": 1,
+      "spend_micros": 249515
+    },
+    {
+      "catalog_version": "glance-catalog-001",
+      "context_blocks": [
+        {
+          "byte_size": 267,
+          "name": "Repository"
+        },
+        {
+          "byte_size": 377,
+          "name": "Navigation"
+        },
+        {
+          "byte_size": 1997,
+          "name": "File signatures"
+        },
+        {
+          "byte_size": 74661,
+          "name": "Root metadata"
+        },
+        {
+          "byte_size": 282771,
+          "name": "Child pages"
+        },
+        {
+          "byte_size": 251,
+          "name": "Root-only obligations"
+        }
+      ],
+      "directory": ".",
+      "image": {
+        "failed": 0,
+        "files": [
+          "glance-image-001.jpg"
+        ],
+        "rendered": 1,
+        "requested": 1,
+        "skipped": 0,
+        "spend_micros": 0
+      },
+      "input_tokens": 111089,
+      "kind": "root",
+      "model": "openai/gpt-5.5-20260423",
+      "output_tokens": 3716,
+      "params": {
+        "max_tokens": 16000,
+        "output_contract": "json_object/glance-catalog-001",
+        "temperature": null
+      },
+      "prompt_version": "glance-007-root-v1",
+      "provider": "openrouter",
+      "retries": 0,
+      "spend_micros": 666925
+    }
+  ],
+  "pages_generated": 15,
+  "source_sha": "fb1486f210885ae663338ebfab4e70210abc4809"
+}

@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en" data-glance-catalog-version="glance-catalog-001" data-source-sha="fb1486f210885ae663338ebfab4e70210abc4809" data-prompt-version="glance-007-root-v1">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>fd — fast, friendly filesystem search</title>
+<style>:root {
+  color-scheme: light dark;
+  --glance-surface: #fcfcfc;
+  --glance-wash: #f3f3f3;
+  --glance-ink: #151515;
+  --glance-ink-muted: #5f6269;
+  --glance-ink-faint: #8b8e96;
+  --glance-line: #e9e9e9;
+  --glance-accent: #2643d0;
+  --glance-accent-soft: #eef0ff;
+  --glance-ok: #1f7a55;
+  --glance-warn: #9a4a1f;
+  --glance-err: #b3261e;
+  --glance-font: Geist, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --glance-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --glance-surface: #121212;
+    --glance-wash: #1b1b1b;
+    --glance-ink: #ededed;
+    --glance-ink-muted: #b8bbc4;
+    --glance-ink-faint: #7d818d;
+    --glance-line: #262626;
+    --glance-accent: #8c9eff;
+    --glance-accent-soft: #202848;
+    --glance-ok: #77d9b0;
+    --glance-warn: #e0a06c;
+    --glance-err: #ff8a80;
+  }
+}
+
+:root[data-theme="dark"] {
+  --glance-surface: #121212;
+  --glance-wash: #1b1b1b;
+  --glance-ink: #ededed;
+  --glance-ink-muted: #b8bbc4;
+  --glance-ink-faint: #7d818d;
+  --glance-line: #262626;
+  --glance-accent: #8c9eff;
+  --glance-accent-soft: #202848;
+  --glance-ok: #77d9b0;
+  --glance-warn: #e0a06c;
+  --glance-err: #ff8a80;
+}
+
+:root[data-theme="light"] {
+  --glance-surface: #fcfcfc;
+  --glance-wash: #f3f3f3;
+  --glance-ink: #151515;
+  --glance-ink-muted: #5f6269;
+  --glance-ink-faint: #8b8e96;
+  --glance-line: #e9e9e9;
+  --glance-accent: #2643d0;
+  --glance-accent-soft: #eef0ff;
+  --glance-ok: #1f7a55;
+  --glance-warn: #9a4a1f;
+  --glance-err: #b3261e;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; overflow-x: clip; }
+body {
+  margin: 0;
+  overflow-x: clip;
+  background: var(--glance-surface);
+  color: var(--glance-ink);
+  font: 16px/1.58 var(--glance-font);
+  letter-spacing: 0;
+}
+a { color: var(--glance-accent); text-decoration-thickness: 1px; text-underline-offset: .18em; }
+code { font-family: var(--glance-mono); font-size: 13px; background: var(--glance-wash); padding: 0 .25em; }
+img, svg, iframe { max-width: 100%; }
+
+.glance-shell {
+  width: min(1120px, calc(100vw - 32px));
+  margin: 0 auto;
+  padding: 24px 0 56px;
+}
+
+.glance-topbar {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  align-items: start;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--glance-line);
+}
+.glance-nav { display: grid; gap: 10px; font-size: 13px; color: var(--glance-ink-muted); }
+.glance-breadcrumb, .glance-nav-row, .glance-theme {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.glance-breadcrumb { font-family: var(--glance-mono); }
+.glance-breadcrumb span { color: var(--glance-ink-faint); }
+.glance-nav a { color: var(--glance-ink-muted); text-decoration: none; border-bottom: 1px solid transparent; }
+.glance-nav a:hover { color: var(--glance-accent); border-bottom-color: var(--glance-accent); }
+.glance-theme { justify-content: end; }
+.glance-theme button {
+  appearance: none;
+  border: 1px solid var(--glance-line);
+  border-radius: 0;
+  background: transparent;
+  color: var(--glance-ink-muted);
+  font: 13px/1 var(--glance-font);
+  padding: 8px 10px;
+  cursor: pointer;
+}
+.glance-theme button[aria-pressed="true"] {
+  color: var(--glance-accent);
+  border-color: var(--glance-accent);
+  background: var(--glance-accent-soft);
+}
+
+.glance-main { display: grid; gap: 1px; background: var(--glance-line); border: 1px solid var(--glance-line); border-top: 0; }
+.glance-component {
+  min-width: 0;
+  background: var(--glance-surface);
+  padding: 28px;
+}
+.glance-hero { min-height: 48vh; display: grid; align-content: center; gap: 20px; }
+.glance-kicker {
+  color: var(--glance-accent);
+  font: 13px/1.35 var(--glance-mono);
+  text-transform: uppercase;
+}
+.glance-hero h1, .glance-section-title, .glance-disclosure summary {
+  margin: 0;
+  color: var(--glance-ink);
+  font-size: 16px;
+  line-height: 1.32;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+.glance-hero-summary, .glance-narrative p, .glance-callout p, .glance-flow-copy {
+  max-width: 76ch;
+  margin: 0;
+  color: var(--glance-ink);
+  overflow-wrap: anywhere;
+}
+.glance-stat-band {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1px;
+  background: var(--glance-line);
+  border: 1px solid var(--glance-line);
+}
+.glance-stat { background: var(--glance-surface); padding: 12px; min-width: 0; }
+.glance-stat strong { display: block; font: 800 16px/1.2 var(--glance-font); }
+.glance-stat span { display: block; margin-top: 4px; color: var(--glance-ink-muted); font: 13px/1.3 var(--glance-mono); }
+
+.glance-narrative, .glance-callouts, .glance-file-table-section, .glance-flow-section { display: grid; gap: 14px; }
+.glance-cite {
+  position: relative;
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--glance-accent) 48%, transparent);
+  text-decoration-style: dotted;
+}
+.glance-cite::after {
+  content: attr(data-cite-label);
+  position: absolute;
+  z-index: 4;
+  left: 0;
+  top: calc(100% + 6px);
+  display: none;
+  width: max-content;
+  max-width: min(360px, calc(100vw - 48px));
+  padding: 8px 10px;
+  border: 1px solid var(--glance-line);
+  background: var(--glance-wash);
+  color: var(--glance-ink-muted);
+  font: 13px/1.35 var(--glance-mono);
+}
+.glance-cite:hover::after, .glance-cite:focus::after, .glance-cite.is-open::after { display: block; }
+.glance-citation-popover { display: none; }
+
+.glance-flow-diagram { width: 100%; height: auto; border: 1px solid var(--glance-line); background: var(--glance-wash); }
+.glance-flow-diagram text { fill: var(--glance-ink); font: 13px var(--glance-mono); text-anchor: middle; }
+.glance-flow-diagram rect { fill: var(--glance-surface); stroke: var(--glance-line); }
+.glance-flow-diagram path { fill: none; stroke: var(--glance-accent); stroke-width: 2; stroke-dasharray: 4 8; animation: glance-flow-pulse 6s linear infinite; }
+@keyframes glance-flow-pulse { to { stroke-dashoffset: -96; } }
+@media (prefers-reduced-motion: reduce) { .glance-flow-diagram path { animation: none; } }
+
+.glance-table-wrap { max-width: 100%; overflow-x: auto; border: 1px solid var(--glance-line); }
+.glance-file-table { width: 100%; border-collapse: collapse; table-layout: fixed; min-width: 720px; }
+.glance-file-table th, .glance-file-table td {
+  padding: 10px;
+  vertical-align: top;
+  text-align: left;
+  border-top: 1px solid var(--glance-line);
+  overflow-wrap: anywhere;
+}
+.glance-file-table th { color: var(--glance-ink-muted); font: 800 13px/1.3 var(--glance-mono); }
+.glance-file-table tr:first-child th { border-top: 0; }
+.glance-file-table .kind { width: 68px; color: var(--glance-ink-faint); font-family: var(--glance-mono); font-size: 13px; }
+.glance-signatures { display: grid; gap: 4px; }
+.glance-signatures code { display: block; white-space: normal; }
+
+.glance-callout-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--glance-line); border: 1px solid var(--glance-line); }
+.glance-callout { background: var(--glance-surface); padding: 14px; border-left: 3px solid var(--glance-accent); }
+.glance-callout[data-kind="hurt"] { border-left-color: var(--glance-err); }
+.glance-callout[data-kind="invariant"] { border-left-color: var(--glance-ok); }
+.glance-callout[data-kind="contract"] { border-left-color: var(--glance-warn); }
+.glance-callout h3 { margin: 0 0 6px; font-size: 16px; font-weight: 800; }
+
+.glance-disclosure { background: var(--glance-surface); padding: 0; }
+.glance-disclosure summary { cursor: pointer; padding: 18px 28px; border-bottom: 1px solid var(--glance-line); }
+.glance-disclosure-inner { display: grid; gap: 1px; background: var(--glance-line); }
+.glance-image-request, .glance-image { margin: 0; display: grid; gap: 8px; justify-items: center; }
+.glance-image img { display: block; width: min(100%, 960px); height: auto; margin: 0 auto; border: 1px solid var(--glance-line); }
+.glance-image-fallback { width: min(100%, 960px); min-height: 220px; display: grid; place-items: center; border: 1px solid var(--glance-line); background: var(--glance-wash); color: var(--glance-ink-muted); text-align: center; padding: 20px; }
+.glance-custom-frame { width: 100%; min-height: 320px; border: 1px solid var(--glance-line); background: var(--glance-wash); }
+
+@media (max-width: 720px) {
+  .glance-shell { width: min(100vw - 20px, 1120px); padding-top: 10px; }
+  .glance-topbar { grid-template-columns: 1fr; }
+  .glance-theme { justify-content: start; }
+  .glance-component { padding: 18px; }
+  .glance-hero { min-height: auto; }
+  .glance-stat-band, .glance-callout-grid { grid-template-columns: 1fr; }
+  .glance-file-table { min-width: 620px; }
+}
+</style>
+<script>try{var m=localStorage.getItem('glance-theme');if(m==='light'||m==='dark'){document.documentElement.setAttribute('data-theme',m);}}catch(_){}</script>
+</head>
+<body class="glance-page" data-glance-directory=".">
+<div class="glance-shell"><header class="glance-topbar"><nav class="glance-nav" aria-label="Glance navigation"><div class="glance-breadcrumb"><a href="index.html">root</a></div><div class="glance-nav-row"><a class="glance-child-link" href=".cargo/index.html">.cargo</a><a class="glance-child-link" href=".github/index.html">.github</a><a class="glance-child-link" href="contrib/index.html">contrib</a><a class="glance-child-link" href="doc/index.html">doc</a><a class="glance-child-link" href="scripts/index.html">scripts</a><a class="glance-child-link" href="src/index.html">src</a><a class="glance-child-link" href="tests/index.html">tests</a></div></nav><div class="glance-theme" role="group" aria-label="Theme"><button type="button" data-theme-choice="light" aria-pressed="false">light</button><button type="button" data-theme-choice="dark" aria-pressed="false">dark</button><button type="button" data-theme-choice="system" aria-pressed="true">system</button></div></header><main class="glance-main"><section class="glance-component glance-hero" data-glance-component="hero" data-glance-section="what-this-is"><div class="glance-kicker">glance-catalog-001</div><h1>A faster, friendlier way to find files</h1><p class="glance-hero-summary">This repository builds a command-line tool that searches your filesystem with simpler defaults than the classic find command: it matches names recursively, respects hidden and ignored files by default, can filter by type, size, owner, or time, and can either print matches or run commands on them.</p><div class="glance-stat-band"><div class="glance-stat"><strong>10.4.2</strong><span>current package version</span></div><div class="glance-stat"><strong>Rust 2024</strong><span>implementation edition</span></div><div class="glance-stat"><strong>src + tests</strong><span>core code and behavioral safety net</span></div><div class="glance-stat"><strong>CI/CD</strong><span>cross-platform release pipeline</span></div></div><figure class="glance-image"><img src="glance-image-001.jpg" alt="Show fd as a command-line search pipeline: user input becomes parsed options, filesystem walking, filtering, formatting or execution, then packaged releases and documentation around it."><figcaption>Show fd as a command-line search pipeline: user input becomes parsed options, filesystem walking, filtering, formatting or execution, then packaged releases and documentation around it.</figcaption></figure></section><section class="glance-component glance-narrative" data-glance-component="narrative" data-glance-section="role-in-the-whole"><h2 class="glance-section-title">What this repository is doing</h2><p>At the highest level, fd is a small promise: finding files should be fast, predictable, and easy to type. The package manifest describes it as <a class="glance-cite" data-glance-cite="Cargo.toml:1-19" data-cite-label="Cargo.toml:1-19" href="https://github.com/sharkdp/fd/blob/fb1486f210885ae663338ebfab4e70210abc4809/Cargo.toml#L1-L19">a simple, fast and user-friendly alternative to find</a>, and the README opens with the same contract: <a class="glance-cite" data-glance-cite="README.md:8-11" data-cite-label="README.md:8-11" href="https://github.com/sharkdp/fd/blob/fb1486f210885ae663338ebfab4e70210abc4809/README.md#L8-L11">fd is a program to find entries in your filesystem</a>.</p><p>The surprising design choice is that friendliness is not a thin wrapper around output. Defaults are opinionated at the search boundary: fd uses concise syntax, regex or glob matching, parallel traversal, colors, smart case, and ignores hidden or gitignored paths by default, as summarized in <a class="glance-cite" data-glance-cite="README.md:15-29" data-cite-label="README.md:15-29" href="https://github.com/sharkdp/fd/blob/fb1486f210885ae663338ebfab4e70210abc4809/README.md#L15-L29">the feature list</a>.</p><p>The repository is organized around that contract. Cargo metadata names a single binary, fd, with its entry point in src/main.rs, while dependencies bring in command-line parsing, ignore-aware walking, regex matching, coloring, command execution helpers, and optional completions <a class="glance-cite" data-glance-cite="Cargo.toml:29-58" data-cite-label="Cargo.toml:29-58" href="https://github.com/sharkdp/fd/blob/fb1486f210885ae663338ebfab4e70210abc4809/Cargo.toml#L29-L58">through the manifest dependency set</a>.</p><p>From there, the source tree owns runtime behavior, tests pin observable behavior, doc and README explain the user surface, scripts automate release chores, contrib and Makefile install shell completions, and GitHub workflows enforce the same story across supported platforms.</p></section><section class="glance-component glance-flow-section" data-glance-component="flow_diagram"><h2 class="glance-section-title">Flow</h2><svg class="glance-flow-diagram" viewBox="0 0 1260 204" role="img" aria-label="Glance flow diagram"><defs><marker id="glance-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z"></path></marker></defs><path class="glance-flow-pulse" d="M148 118 H392" marker-end="url(#glance-arrow)"></path><text x="270" y="84">flags become behavior</text><path class="glance-flow-pulse" d="M328 118 H392" marker-end="url(#glance-arrow)"></path><text x="360" y="68">binary entry point</text><path class="glance-flow-pulse" d="M508 118 H572" marker-end="url(#glance-arrow)"></path><text x="540" y="84">Config drives downstream modules</text><path class="glance-flow-pulse" d="M688 118 H752" marker-end="url(#glance-arrow)"></path><text x="720" y="68">observable behavior is pinned</text><path class="glance-flow-pulse" d="M508 118 H932" marker-end="url(#glance-arrow)"></path><text x="720" y="52">CLI surface is documented</text><path class="glance-flow-pulse" d="M868 118 H1112" marker-end="url(#glance-arrow)"></path><text x="990" y="68">CI gates releases</text><path class="glance-flow-pulse" d="M1048 118 H1112" marker-end="url(#glance-arrow)"></path><text x="1080" y="84">installable artifacts include docs and completions</text><g><rect x="32" y="94" width="116" height="48"></rect><text x="90" y="118">fd pattern and flags</text><text x="90" y="134">input</text></g><g><rect x="212" y="94" width="116" height="48"></rect><text x="270" y="118">Cargo package and binary</text><text x="270" y="134">source</text></g><g><rect x="392" y="94" width="116" height="48"></rect><text x="450" y="118">src parses, configures, walks</text><text x="450" y="134">engine</text></g><g><rect x="572" y="94" width="116" height="48"></rect><text x="630" y="118">filters, formatting, exec</text><text x="630" y="134">engine</text></g><g><rect x="752" y="94" width="116" height="48"></rect><text x="810" y="118">integration tests</text><text x="810" y="134">safety</text></g><g><rect x="932" y="94" width="116" height="48"></rect><text x="990" y="118">README, man page, completions</text><text x="990" y="134">docs</text></g><g><rect x="1112" y="94" width="116" height="48"></rect><text x="1170" y="118">Makefile, scripts, CI/CD</text><text x="1170" y="134">automation</text></g></svg></section><section class="glance-component glance-callouts" data-glance-component="callouts"><h2 class="glance-section-title">Seams and sharp edges</h2><div class="glance-callout-grid"><article class="glance-callout" data-kind="contract" data-glance-section="seams-contracts"><h3>Config is the load-bearing contract</h3><p>The source page shows Config as the single source of truth after raw command-line parsing. Adding a flag is not complete until it is represented in Config and consumed by the walker, filters, output, or exec path.</p></article><article class="glance-callout" data-kind="invariant" data-glance-section="role-in-the-whole"><h3>Search behavior is tested as users see it</h3><p>The integration tests run the real binary against temporary directory trees and compare exact output, so changes to matching, sorting, errors, path separators, and platform behavior become visible.</p></article><article class="glance-callout" data-kind="seam" data-glance-section="seams-contracts"><h3>Packaging is separate from runtime search</h3><p>The Makefile builds the release binary, generates completions, installs shell integration files, and installs the man page, keeping runtime code and distribution layout separate <a class="glance-cite" data-glance-cite="Makefile:44-52" data-cite-label="Makefile:44-52" href="https://github.com/sharkdp/fd/blob/fb1486f210885ae663338ebfab4e70210abc4809/Makefile#L44-L52">through the install target</a>.</p></article><article class="glance-callout" data-kind="hurt" data-glance-section="where-it-can-hurt-you"><h3>Documentation and completions can drift</h3><p>The README&#39;s command-line options are generated from fd help text, while completions and the man page live outside the parser. A new flag must move through source, tests, docs, and completion assets to stay discoverable.</p></article></div></section><section class="glance-component glance-file-table-section" data-glance-component="file_table" data-glance-section="composition"><h2 class="glance-section-title">Files to know</h2><div class="glance-table-wrap"><table class="glance-file-table"><tr><th class="kind">kind</th><th>name</th><th>role</th><th>signatures</th><th>gotcha</th></tr><tr><td class="kind">dir</td><td><a href=".cargo/index.html">.cargo</a></td><td>Configures Cargo behavior for platform-specific builds.</td><td><div class="glance-signatures"><span class="glance-muted">none</span> </div></td><td>none</td></tr><tr><td class="kind">dir</td><td><a href=".github/index.html">.github</a></td><td>Holds GitHub automation, issue templates, and workflows.</td><td><div class="glance-signatures"><span class="glance-muted">none</span> </div></td><td>none</td></tr><tr><td class="kind">dir</td><td><a href="contrib/index.html">contrib</a></td><td>Stores extra shell integration files for packaging.</td><td><div class="glance-signatures"><span class="glance-muted">none</span> </div></td><td>none</td></tr><tr><td class="kind">dir</td><td><a href="doc/index.html">doc</a></td><td>Contains man page, release notes, media, and sponsors.</td><td><div class="glance-signatures"><span class="glance-muted">none</span> </div></td><td>none</td></tr><tr><td class="kind">dir</td><td><a href="scripts/index.html">scripts</a></td><td>Automates release, packaging, and documentation updates.</td><td><div class="glance-signatures"><span class="glance-muted">none</span> </div></td><td>none</td></tr><tr><td class="kind">dir</td><td><a href="src/index.html">src</a></td><td>Implements parsing, walking, filtering, formatting, and execution.</td><td><div class="glance-signatures"><span class="glance-muted">none</span> </div></td><td>none</td></tr><tr><td class="kind">dir</td><td><a href="tests/index.html">tests</a></td><td>Runs black-box behavioral tests against the fd binary.</td><td><div class="glance-signatures"><span class="glance-muted">none</span> </div></td><td>none</td></tr><tr><td class="kind">file</td><td>.gitignore</td><td>Excludes generated build and completion artifacts.</td><td><div class="glance-signatures"><code>target/</code><code>/autocomplete/</code><code>**/*.rs.bk</code> </div></td><td>none</td></tr><tr><td class="kind">file</td><td>CHANGELOG.md</td><td>Records release history and unreleased changes.</td><td><div class="glance-signatures"><code># Unreleased</code><code>## Features</code><code>## Bugfixes</code><code># 10.4.2</code><code>## Bugfixes</code><code># 10.4.1</code><code># 10.4.0</code><code>## Features</code><code>## Bugfixes</code><code>## Changes</code><code># 10.3.0</code><code>## Features</code> </div></td><td>none</td></tr><tr><td class="kind">file</td><td>CONTRIBUTING.md</td><td>Explains expectations for contributors and pull requests.</td><td><div class="glance-signatures"><code>## Contributing to *fd*</code><code>## Pull Request Expectations</code><code>## Add an entry to the changelog</code><code>## Important links</code> </div></td><td>none</td></tr><tr data-glance-cite="Cargo.lock:1-3"><td class="kind">file</td><td>Cargo.lock</td><td>Pins the full Rust dependency graph.</td><td><div class="glance-signatures"><code># This file is automatically @generated by Cargo.</code><code># It is not intended for manual editing.</code><code>version = 4</code> </div></td><td>none</td></tr><tr data-glance-cite="Cargo.toml:1-115"><td class="kind">file</td><td>Cargo.toml</td><td>Defines the crate, binary, dependencies, and features.</td><td><div class="glance-signatures"><code>[package]</code><code>authors = [&quot;David Peter &lt;mail@david-peter.de&gt;&quot;]</code><code>categories = [&quot;command-line-utilities&quot;]</code> </div></td><td>none</td></tr><tr><td class="kind">file</td><td>Cross.toml</td><td>Passes cross-build environment for aarch64 Linux.</td><td><div class="glance-signatures"><code># https://github.com/sharkdp/fd/issues/1085</code><code>[target.aarch64-unknown-linux-gnu.env]</code><code>passthrough = [&quot;JEMALLOC_SYS_WITH_LG_PAGE=16&quot;]</code> </div></td><td>none</td></tr><tr><td class="kind">file</td><td>LICENSE-APACHE</td><td>Provides the Apache 2.0 license text.</td><td><div class="glance-signatures"><code>Apache License</code><code>Version 2.0, January 2004</code><code>http://www.apache.org/licenses/</code> </div></td><td>none</td></tr><tr><td class="kind">file</td><td>LICENSE-MIT</td><td>Provides the MIT license text.</td><td><div class="glance-signatures"><code>MIT License</code><code>Copyright (c) 2017-present The fd developers</code><code>Permission is hereby granted, free of charge, to any person obtaining a copy</code> </div></td><td>none</td></tr><tr data-glance-cite="Makefile:1-52"><td class="kind">file</td><td>Makefile</td><td>Builds, completes, installs, and packages local artifacts.</td><td><div class="glance-signatures"><code>PROFILE=release</code><code>EXE=target/$(PROFILE)/fd</code><code>prefix=/usr/local</code> </div></td><td>none</td></tr><tr data-glance-cite="README.md:1-790"><td class="kind">file</td><td>README.md</td><td>Documents features, usage, installation, and development workflow.</td><td><div class="glance-signatures"><code># fd</code><code>## Features</code><code>## Demo</code><code>## How to use</code><code>### Simple search</code><code>### Regular expression search</code><code>### Specifying the root directory</code><code>### List all files, recursively</code><code>### Searching for a particular file extension</code><code>### Searching for a particular file name</code><code>### Hidden and ignored files</code><code>### Matching the full path</code> </div></td><td>none</td></tr><tr><td class="kind">file</td><td>SECURITY.md</td><td>Explains confidential security reporting expectations.</td><td><div class="glance-signatures"><code># Security Reporting</code><code>## Reporting</code><code>## Confidentiality</code><code>## Notes</code> </div></td><td>none</td></tr><tr><td class="kind">file</td><td>rustfmt.toml</td><td>Keeps Rust formatting on standard defaults.</td><td><div class="glance-signatures"><code># Defaults are used</code> </div></td><td>none</td></tr></table></div></section><details class="glance-disclosure" data-glance-component="disclosure"><summary>Primary flows across the repository</summary><div class="glance-disclosure-inner"><section class="glance-component glance-narrative" data-glance-component="narrative" data-glance-section="role-in-the-whole"><h2 class="glance-section-title">Flow 1: a search becomes output or commands</h2><p>The user-facing contract starts with examples like simple recursive search, regex search, explicit roots, extension filters, hidden and ignored files, and full-path matching in <a class="glance-cite" data-glance-cite="README.md:34-153" data-cite-label="README.md:34-153" href="https://github.com/sharkdp/fd/blob/fb1486f210885ae663338ebfab4e70210abc4809/README.md#L34-L153">the README usage guide</a>.</p><p>Inside src, raw options are parsed, resolved into Config, then handed to the walker; child modules handle filters, custom formatting, and command execution. The src page cites the entry point, CLI declaration, Config shape, walker scan, output printing, and exec dispatch as the core path.</p><p>The behavior then returns to the outside world as either printed paths or commands run with -x and -X. The README documents per-result and batch command execution, placeholder syntax, and parallel execution <a class="glance-cite" data-glance-cite="README.md:154-242" data-cite-label="README.md:154-242" href="https://github.com/sharkdp/fd/blob/fb1486f210885ae663338ebfab4e70210abc4809/README.md#L154-L242">as part of the command execution section</a>.</p></section><section class="glance-component glance-narrative" data-glance-component="narrative" data-glance-section="role-in-the-whole"><h2 class="glance-section-title">Flow 2: source behavior becomes tested behavior</h2><p>The tests directory runs the compiled fd binary against real temporary directories, using a shared test environment to create files, ignore files, symlinks, and controlled roots. Child citations identify tests/tests.rs as the main behavioral suite and tests/testenv/mod.rs as the sandbox helper.</p><p>This matters because many fd features are filesystem semantics, not pure functions: hidden files, ignore rules, symlinks, broken symlinks, ownership, modification time, depth limits, and command execution all depend on real platform behavior.</p><p>The development instructions keep this flow simple for contributors: clone, build, run cargo test, and install from the local path <a class="glance-cite" data-glance-cite="README.md:734-747" data-cite-label="README.md:734-747" href="https://github.com/sharkdp/fd/blob/fb1486f210885ae663338ebfab4e70210abc4809/README.md#L734-L747">through the development commands</a>.</p></section><section class="glance-component glance-narrative" data-glance-component="narrative" data-glance-section="role-in-the-whole"><h2 class="glance-section-title">Flow 3: code becomes a release artifact</h2><p>The manifest declares package name, version, edition, minimum Rust version, binary path, features, and install metadata <a class="glance-cite" data-glance-cite="Cargo.toml:15-21" data-cite-label="Cargo.toml:15-21" href="https://github.com/sharkdp/fd/blob/fb1486f210885ae663338ebfab4e70210abc4809/Cargo.toml#L15-L21">in Cargo.toml</a> <a class="glance-cite" data-glance-cite="Cargo.toml:94-115" data-cite-label="Cargo.toml:94-115" href="https://github.com/sharkdp/fd/blob/fb1486f210885ae663338ebfab4e70210abc4809/Cargo.toml#L94-L115">and package metadata</a>.</p><p>The Makefile builds with locked dependencies, generates shell completions from the built executable or contrib files, and installs the binary, completions, and man page <a class="glance-cite" data-glance-cite="Makefile:8-52" data-cite-label="Makefile:8-52" href="https://github.com/sharkdp/fd/blob/fb1486f210885ae663338ebfab4e70210abc4809/Makefile#L8-L52">through its build and install rules</a>.</p><p>GitHub workflows, release scripts, docs, and package metadata surround that local workflow with CI checks, release packages, Debian artifacts, and published binaries. The README also documents installation from package managers, source, and prebuilt binaries <a class="glance-cite" data-glance-cite="README.md:538-733" data-cite-label="README.md:538-733" href="https://github.com/sharkdp/fd/blob/fb1486f210885ae663338ebfab4e70210abc4809/README.md#L538-L733">across the installation section</a>.</p></section></div></details><details class="glance-disclosure" data-glance-component="disclosure"><summary>Data model: stored shapes versus derived shapes</summary><div class="glance-disclosure-inner"><section class="glance-component glance-callouts" data-glance-component="callouts"><h2 class="glance-section-title">Seams and sharp edges</h2><div class="glance-callout-grid"><article class="glance-callout" data-kind="invariant" data-glance-section="role-in-the-whole"><h3>Stored shapes</h3><p>Stored shapes are files committed to the repository: Cargo.toml, Cargo.lock, README.md, Makefile, licenses, docs, scripts, source files, tests, GitHub workflows, completion files, and configuration directories.</p></article><article class="glance-callout" data-kind="contract" data-glance-section="seams-contracts"><h3>Derived runtime shapes</h3><p>Derived runtime shapes include parsed command-line options, Config, compiled regexes, DirEntry wrappers, file metadata, filters, formatted output, command templates, command batches, exit codes, and sanitized terminal strings.</p></article><article class="glance-callout" data-kind="seam" data-glance-section="seams-contracts"><h3>Derived release shapes</h3><p>Derived release shapes include the target binary, generated autocomplete files, Debian packages, compressed release archives, Winget updates, installed man pages, and generated help text.</p></article><article class="glance-callout" data-kind="invariant" data-glance-section="role-in-the-whole"><h3>Lockfile protects the dependency shape</h3><p>Cargo.lock is explicitly generated by Cargo and not meant for manual editing <a class="glance-cite" data-glance-cite="Cargo.lock:1-3" data-cite-label="Cargo.lock:1-3" href="https://github.com/sharkdp/fd/blob/fb1486f210885ae663338ebfab4e70210abc4809/Cargo.lock#L1-L3">according to its header</a>, while the fd-find package entry pins the version and dependency list used to build this release <a class="glance-cite" data-glance-cite="Cargo.lock:297-324" data-cite-label="Cargo.lock:297-324" href="https://github.com/sharkdp/fd/blob/fb1486f210885ae663338ebfab4e70210abc4809/Cargo.lock#L297-L324">in the package section</a>.</p></article></div></section></div></details><details class="glance-disclosure" data-glance-component="disclosure"><summary>Failure-edge index from child pages</summary><div class="glance-disclosure-inner"><section class="glance-component glance-callouts" data-glance-component="callouts"><h2 class="glance-section-title">Seams and sharp edges</h2><div class="glance-callout-grid"><article class="glance-callout" data-kind="hurt" data-glance-section="where-it-can-hurt-you"><h3>Windows runtime linkage can fail after deployment</h3><p>The .cargo page highlights static CRT linking: without the target-specific rustflags, a Windows executable can fail on machines missing the vcruntime DLL.</p></article><article class="glance-callout" data-kind="hurt" data-glance-section="where-it-can-hurt-you"><h3>Automation can go stale invisibly</h3><p>The .github pages call out stale issue templates, outdated workflow matrices, and cross-compilation prerequisites as failures that often surface only when a contributor files an issue or CI runs a release build.</p></article><article class="glance-callout" data-kind="hurt" data-glance-section="where-it-can-hurt-you"><h3>Completion files can fall behind new flags</h3><p>The contrib pages warn that shell completions live outside the main parser; a new flag added to source must also reach the completion scripts or users will not discover it through tab completion.</p></article><article class="glance-callout" data-kind="hurt" data-glance-section="where-it-can-hurt-you"><h3>Documentation can drift from the CLI</h3><p>The doc and scripts pages both point at generated help and man-page maintenance: option text must be refreshed when the CLI changes, or users read stale behavior.</p></article><article class="glance-callout" data-kind="hurt" data-glance-section="where-it-can-hurt-you"><h3>Release scripts rely on expected formats</h3><p>The scripts page warns that update-help.awk depends on recognizable documentation markers and fd help output; changing either format breaks the automation.</p></article><article class="glance-callout" data-kind="hurt" data-glance-section="where-it-can-hurt-you"><h3>Core search errors can become silent misses</h3><p>The src page highlights path separators in patterns: without the explicit diagnostic, a pasted path can look like a valid pattern that simply returns no results.</p></article><article class="glance-callout" data-kind="hurt" data-glance-section="where-it-can-hurt-you"><h3>Command execution needs precise error handling</h3><p>The exec page warns about missing executables, empty command lists, placeholder rules, and exit-code propagation; mistakes here turn search results into failed or misleading commands.</p></article><article class="glance-callout" data-kind="hurt" data-glance-section="where-it-can-hurt-you"><h3>Filter parsing can produce wrong results</h3><p>The filter page calls out size-unit parsing and owner lookup. A bad multiplier, missing test case, or unresolved user/group silently changes which files match.</p></article><article class="glance-callout" data-kind="hurt" data-glance-section="where-it-can-hurt-you"><h3>Formatting placeholders are easy to misparse</h3><p>The fmt page identifies escaped braces and placeholder registration as a sharp edge: new placeholders must update both the pattern list and token conversion.</p></article><article class="glance-callout" data-kind="hurt" data-glance-section="where-it-can-hurt-you"><h3>Tests are platform-sensitive</h3><p>The tests pages warn that symlinks, executable bits, filesystem boundaries, path separators, broken symlinks, and output ordering need platform gates and normalization or CI fails away from the maintainer&#39;s machine.</p></article></div></section></div></details></main></div>
+<div class="glance-citation-popover" aria-hidden="true"></div>
+<script>(function () {
+  var root = document.documentElement;
+  var storageKey = "glance-theme";
+  var choices = Array.prototype.slice.call(document.querySelectorAll("[data-theme-choice]"));
+
+  function apply(choice) {
+    if (choice === "light" || choice === "dark") {
+      root.setAttribute("data-theme", choice);
+      try { localStorage.setItem(storageKey, choice); } catch (_) {}
+    } else {
+      root.removeAttribute("data-theme");
+      try { localStorage.removeItem(storageKey); } catch (_) {}
+      choice = "system";
+    }
+    choices.forEach(function (button) {
+      var active = button.getAttribute("data-theme-choice") === choice;
+      button.setAttribute("aria-pressed", active ? "true" : "false");
+    });
+  }
+
+  try {
+    var saved = localStorage.getItem(storageKey);
+    if (saved === "light" || saved === "dark") {
+      root.setAttribute("data-theme", saved);
+    }
+  } catch (_) {}
+
+  choices.forEach(function (button) {
+    button.addEventListener("click", function () {
+      apply(button.getAttribute("data-theme-choice"));
+    });
+  });
+  apply(root.getAttribute("data-theme") || "system");
+
+  document.addEventListener("click", function (event) {
+    var cite = event.target.closest && event.target.closest(".glance-cite");
+    document.querySelectorAll(".glance-cite.is-open").forEach(function (node) {
+      if (node !== cite) node.classList.remove("is-open");
+    });
+    if (!cite) return;
+    cite.classList.toggle("is-open");
+  });
+})();
+</script>
+</body>
+</html>
