@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en" data-glance-catalog-version="glance-catalog-001" data-source-sha="fb1486f210885ae663338ebfab4e70210abc4809" data-prompt-version="glance-007-interior-v1">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>contrib — packaging and completion helpers for fd</title>
+<style>:root {
+  color-scheme: light dark;
+  --glance-surface: #fcfcfc;
+  --glance-wash: #f3f3f3;
+  --glance-ink: #151515;
+  --glance-ink-muted: #5f6269;
+  --glance-ink-faint: #8b8e96;
+  --glance-line: #e9e9e9;
+  --glance-accent: #2643d0;
+  --glance-accent-soft: #eef0ff;
+  --glance-ok: #1f7a55;
+  --glance-warn: #9a4a1f;
+  --glance-err: #b3261e;
+  --glance-font: Geist, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --glance-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --glance-surface: #121212;
+    --glance-wash: #1b1b1b;
+    --glance-ink: #ededed;
+    --glance-ink-muted: #b8bbc4;
+    --glance-ink-faint: #7d818d;
+    --glance-line: #262626;
+    --glance-accent: #8c9eff;
+    --glance-accent-soft: #202848;
+    --glance-ok: #77d9b0;
+    --glance-warn: #e0a06c;
+    --glance-err: #ff8a80;
+  }
+}
+
+:root[data-theme="dark"] {
+  --glance-surface: #121212;
+  --glance-wash: #1b1b1b;
+  --glance-ink: #ededed;
+  --glance-ink-muted: #b8bbc4;
+  --glance-ink-faint: #7d818d;
+  --glance-line: #262626;
+  --glance-accent: #8c9eff;
+  --glance-accent-soft: #202848;
+  --glance-ok: #77d9b0;
+  --glance-warn: #e0a06c;
+  --glance-err: #ff8a80;
+}
+
+:root[data-theme="light"] {
+  --glance-surface: #fcfcfc;
+  --glance-wash: #f3f3f3;
+  --glance-ink: #151515;
+  --glance-ink-muted: #5f6269;
+  --glance-ink-faint: #8b8e96;
+  --glance-line: #e9e9e9;
+  --glance-accent: #2643d0;
+  --glance-accent-soft: #eef0ff;
+  --glance-ok: #1f7a55;
+  --glance-warn: #9a4a1f;
+  --glance-err: #b3261e;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; overflow-x: clip; }
+body {
+  margin: 0;
+  overflow-x: clip;
+  background: var(--glance-surface);
+  color: var(--glance-ink);
+  font: 16px/1.58 var(--glance-font);
+  letter-spacing: 0;
+}
+a { color: var(--glance-accent); text-decoration-thickness: 1px; text-underline-offset: .18em; }
+code { font-family: var(--glance-mono); font-size: 13px; background: var(--glance-wash); padding: 0 .25em; }
+img, svg, iframe { max-width: 100%; }
+
+.glance-shell {
+  width: min(1120px, calc(100vw - 32px));
+  margin: 0 auto;
+  padding: 24px 0 56px;
+}
+
+.glance-topbar {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  align-items: start;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--glance-line);
+}
+.glance-nav { display: grid; gap: 10px; font-size: 13px; color: var(--glance-ink-muted); }
+.glance-breadcrumb, .glance-nav-row, .glance-theme {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.glance-breadcrumb { font-family: var(--glance-mono); }
+.glance-breadcrumb span { color: var(--glance-ink-faint); }
+.glance-nav a { color: var(--glance-ink-muted); text-decoration: none; border-bottom: 1px solid transparent; }
+.glance-nav a:hover { color: var(--glance-accent); border-bottom-color: var(--glance-accent); }
+.glance-theme { justify-content: end; }
+.glance-theme button {
+  appearance: none;
+  border: 1px solid var(--glance-line);
+  border-radius: 0;
+  background: transparent;
+  color: var(--glance-ink-muted);
+  font: 13px/1 var(--glance-font);
+  padding: 8px 10px;
+  cursor: pointer;
+}
+.glance-theme button[aria-pressed="true"] {
+  color: var(--glance-accent);
+  border-color: var(--glance-accent);
+  background: var(--glance-accent-soft);
+}
+
+.glance-main { display: grid; gap: 1px; background: var(--glance-line); border: 1px solid var(--glance-line); border-top: 0; }
+.glance-component {
+  min-width: 0;
+  background: var(--glance-surface);
+  padding: 28px;
+}
+.glance-hero { min-height: 48vh; display: grid; align-content: center; gap: 20px; }
+.glance-kicker {
+  color: var(--glance-accent);
+  font: 13px/1.35 var(--glance-mono);
+  text-transform: uppercase;
+}
+.glance-hero h1, .glance-section-title, .glance-disclosure summary {
+  margin: 0;
+  color: var(--glance-ink);
+  font-size: 16px;
+  line-height: 1.32;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+.glance-hero-summary, .glance-narrative p, .glance-callout p, .glance-flow-copy {
+  max-width: 76ch;
+  margin: 0;
+  color: var(--glance-ink);
+  overflow-wrap: anywhere;
+}
+.glance-stat-band {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1px;
+  background: var(--glance-line);
+  border: 1px solid var(--glance-line);
+}
+.glance-stat { background: var(--glance-surface); padding: 12px; min-width: 0; }
+.glance-stat strong { display: block; font: 800 16px/1.2 var(--glance-font); }
+.glance-stat span { display: block; margin-top: 4px; color: var(--glance-ink-muted); font: 13px/1.3 var(--glance-mono); }
+
+.glance-narrative, .glance-callouts, .glance-file-table-section, .glance-flow-section { display: grid; gap: 14px; }
+.glance-cite {
+  position: relative;
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--glance-accent) 48%, transparent);
+  text-decoration-style: dotted;
+}
+.glance-cite::after {
+  content: attr(data-cite-label);
+  position: absolute;
+  z-index: 4;
+  left: 0;
+  top: calc(100% + 6px);
+  display: none;
+  width: max-content;
+  max-width: min(360px, calc(100vw - 48px));
+  padding: 8px 10px;
+  border: 1px solid var(--glance-line);
+  background: var(--glance-wash);
+  color: var(--glance-ink-muted);
+  font: 13px/1.35 var(--glance-mono);
+}
+.glance-cite:hover::after, .glance-cite:focus::after, .glance-cite.is-open::after { display: block; }
+.glance-citation-popover { display: none; }
+
+.glance-flow-diagram { width: 100%; height: auto; border: 1px solid var(--glance-line); background: var(--glance-wash); }
+.glance-flow-diagram text { fill: var(--glance-ink); font: 13px var(--glance-mono); text-anchor: middle; }
+.glance-flow-diagram rect { fill: var(--glance-surface); stroke: var(--glance-line); }
+.glance-flow-diagram path { fill: none; stroke: var(--glance-accent); stroke-width: 2; stroke-dasharray: 4 8; animation: glance-flow-pulse 6s linear infinite; }
+@keyframes glance-flow-pulse { to { stroke-dashoffset: -96; } }
+@media (prefers-reduced-motion: reduce) { .glance-flow-diagram path { animation: none; } }
+
+.glance-table-wrap { max-width: 100%; overflow-x: auto; border: 1px solid var(--glance-line); }
+.glance-file-table { width: 100%; border-collapse: collapse; table-layout: fixed; min-width: 720px; }
+.glance-file-table th, .glance-file-table td {
+  padding: 10px;
+  vertical-align: top;
+  text-align: left;
+  border-top: 1px solid var(--glance-line);
+  overflow-wrap: anywhere;
+}
+.glance-file-table th { color: var(--glance-ink-muted); font: 800 13px/1.3 var(--glance-mono); }
+.glance-file-table tr:first-child th { border-top: 0; }
+.glance-file-table .kind { width: 68px; color: var(--glance-ink-faint); font-family: var(--glance-mono); font-size: 13px; }
+.glance-signatures { display: grid; gap: 4px; }
+.glance-signatures code { display: block; white-space: normal; }
+
+.glance-callout-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--glance-line); border: 1px solid var(--glance-line); }
+.glance-callout { background: var(--glance-surface); padding: 14px; border-left: 3px solid var(--glance-accent); }
+.glance-callout[data-kind="hurt"] { border-left-color: var(--glance-err); }
+.glance-callout[data-kind="invariant"] { border-left-color: var(--glance-ok); }
+.glance-callout[data-kind="contract"] { border-left-color: var(--glance-warn); }
+.glance-callout h3 { margin: 0 0 6px; font-size: 16px; font-weight: 800; }
+
+.glance-disclosure { background: var(--glance-surface); padding: 0; }
+.glance-disclosure summary { cursor: pointer; padding: 18px 28px; border-bottom: 1px solid var(--glance-line); }
+.glance-disclosure-inner { display: grid; gap: 1px; background: var(--glance-line); }
+.glance-image-request, .glance-image { margin: 0; display: grid; gap: 8px; justify-items: center; }
+.glance-image img { display: block; width: min(100%, 960px); height: auto; margin: 0 auto; border: 1px solid var(--glance-line); }
+.glance-image-fallback { width: min(100%, 960px); min-height: 220px; display: grid; place-items: center; border: 1px solid var(--glance-line); background: var(--glance-wash); color: var(--glance-ink-muted); text-align: center; padding: 20px; }
+.glance-custom-frame { width: 100%; min-height: 320px; border: 1px solid var(--glance-line); background: var(--glance-wash); }
+
+@media (max-width: 720px) {
+  .glance-shell { width: min(100vw - 20px, 1120px); padding-top: 10px; }
+  .glance-topbar { grid-template-columns: 1fr; }
+  .glance-theme { justify-content: start; }
+  .glance-component { padding: 18px; }
+  .glance-hero { min-height: auto; }
+  .glance-stat-band, .glance-callout-grid { grid-template-columns: 1fr; }
+  .glance-file-table { min-width: 620px; }
+}
+</style>
+<script>try{var m=localStorage.getItem('glance-theme');if(m==='light'||m==='dark'){document.documentElement.setAttribute('data-theme',m);}}catch(_){}</script>
+</head>
+<body class="glance-page" data-glance-directory="contrib">
+<div class="glance-shell"><header class="glance-topbar"><nav class="glance-nav" aria-label="Glance navigation"><div class="glance-breadcrumb"><a href="../index.html">root</a><span>/</span><a href="index.html">contrib</a></div><div class="glance-nav-row"><a class="glance-parent-link" href="../index.html">parent</a><a class="glance-child-link" href="completion/index.html">contrib/completion</a><a class="glance-sibling-link" href="../.cargo/index.html">.cargo</a><a class="glance-sibling-link" href="../.github/index.html">.github</a><a class="glance-sibling-link" href="../doc/index.html">doc</a><a class="glance-sibling-link" href="../scripts/index.html">scripts</a><a class="glance-sibling-link" href="../src/index.html">src</a><a class="glance-sibling-link" href="../tests/index.html">tests</a></div></nav><div class="glance-theme" role="group" aria-label="Theme"><button type="button" data-theme-choice="light" aria-pressed="false">light</button><button type="button" data-theme-choice="dark" aria-pressed="false">dark</button><button type="button" data-theme-choice="system" aria-pressed="true">system</button></div></header><main class="glance-main"><section class="glance-component glance-hero" data-glance-component="hero" data-glance-section="what-this-is"><div class="glance-kicker">glance-catalog-001</div><h1>Extra files that help fd fit into your system</h1><p class="glance-hero-summary">This folder holds small helper files that are not part of the fd program itself. They make fd behave nicely once it is installed, mainly by teaching your shell how to autocomplete its command-line flags.</p><div class="glance-stat-band"><div class="glance-stat"><strong>1</strong><span>Direct subfolders</span></div><div class="glance-stat"><strong>completion</strong><span>Subfolder</span></div><div class="glance-stat"><strong>zsh, bash, fish</strong><span>Shells covered</span></div></div></section><section class="glance-component glance-narrative" data-glance-component="narrative" data-glance-section="role-in-the-whole"><h2 class="glance-section-title">One job: make fd easier to type</h2><p>Everything under this directory exists to smooth over the gap between the fd binary and the environment it runs in. Right now that job is entirely about shell completions: when someone presses Tab after typing fd, their shell needs a list of valid flags and values to suggest.</p><p>There is exactly one child directory here, completion, which contains the actual completion scripts for Zsh, Bash, and Fish. This directory itself holds no loose files; it is purely an organizational wrapper.</p></section><section class="glance-component glance-file-table-section" data-glance-component="file_table" data-glance-section="composition"><h2 class="glance-section-title">Files to know</h2><div class="glance-table-wrap"><table class="glance-file-table"><tr><th class="kind">kind</th><th>name</th><th>role</th><th>signatures</th><th>gotcha</th></tr><tr><td class="kind">dir</td><td><a href="../completion/index.html">completion</a></td><td>Holds the Zsh, Bash, and Fish completion scripts.</td><td><div class="glance-signatures"><span class="glance-muted">none</span> </div></td><td>none</td></tr></table></div></section><details class="glance-disclosure" data-glance-component="disclosure"><summary>Why this separation exists</summary><div class="glance-disclosure-inner"><section class="glance-component glance-callouts" data-glance-component="callouts"><h2 class="glance-section-title">Seams and sharp edges</h2><div class="glance-callout-grid"><article class="glance-callout" data-kind="seam" data-glance-section="seams-contracts"><h3>Packaging boundary</h3><p>contrib is the seam between fd&#39;s own source and the extras that downstream packagers copy into system directories during installation.</p></article><article class="glance-callout" data-kind="contract" data-glance-section="seams-contracts"><h3>Zsh is the source of truth</h3><p>The completion subfolder treats its Zsh script as the authoritative definition of fd&#39;s flags; Bash and Fish completions are thin wrappers that delegate to it rather than redefining the flag list.</p></article><article class="glance-callout" data-kind="hurt" data-glance-section="where-it-can-hurt-you"><h3>Silent drift</h3><p>Because completions live outside the main source tree, a new flag added to fd&#39;s argument parser will not appear in any shell&#39;s suggestions unless someone remembers to update the completion subfolder separately.</p></article></div></section></div></details></main></div>
+<div class="glance-citation-popover" aria-hidden="true"></div>
+<script>(function () {
+  var root = document.documentElement;
+  var storageKey = "glance-theme";
+  var choices = Array.prototype.slice.call(document.querySelectorAll("[data-theme-choice]"));
+
+  function apply(choice) {
+    if (choice === "light" || choice === "dark") {
+      root.setAttribute("data-theme", choice);
+      try { localStorage.setItem(storageKey, choice); } catch (_) {}
+    } else {
+      root.removeAttribute("data-theme");
+      try { localStorage.removeItem(storageKey); } catch (_) {}
+      choice = "system";
+    }
+    choices.forEach(function (button) {
+      var active = button.getAttribute("data-theme-choice") === choice;
+      button.setAttribute("aria-pressed", active ? "true" : "false");
+    });
+  }
+
+  try {
+    var saved = localStorage.getItem(storageKey);
+    if (saved === "light" || saved === "dark") {
+      root.setAttribute("data-theme", saved);
+    }
+  } catch (_) {}
+
+  choices.forEach(function (button) {
+    button.addEventListener("click", function () {
+      apply(button.getAttribute("data-theme-choice"));
+    });
+  });
+  apply(root.getAttribute("data-theme") || "system");
+
+  document.addEventListener("click", function (event) {
+    var cite = event.target.closest && event.target.closest(".glance-cite");
+    document.querySelectorAll(".glance-cite.is-open").forEach(function (node) {
+      if (node !== cite) node.classList.remove("is-open");
+    });
+    if (!cite) return;
+    cite.classList.toggle("is-open");
+  });
+})();
+</script>
+</body>
+</html>

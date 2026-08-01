@@ -1,0 +1,42 @@
+{
+  "catalog_version": "glance-catalog-001",
+  "context_blocks": [
+    {
+      "byte_size": 273,
+      "name": "Repository"
+    },
+    {
+      "byte_size": 285,
+      "name": "Navigation"
+    },
+    {
+      "byte_size": 464,
+      "name": "File signatures"
+    },
+    {
+      "byte_size": 15291,
+      "name": "Local file contents"
+    },
+    {
+      "byte_size": 26,
+      "name": "Parent chain"
+    },
+    {
+      "byte_size": 43,
+      "name": "Sibling directory names"
+    }
+  ],
+  "degraded_children": [],
+  "directory": "src/fmt",
+  "input_tokens": 7231,
+  "kind": "leaf",
+  "metadata_notes": [],
+  "model": "deepseek/deepseek-v4-flash-20260423",
+  "output_tokens": 1878,
+  "prompt_version": "glance-007-leaf-v1",
+  "provider": "openrouter",
+  "retries": 0,
+  "source_sha": "fb1486f210885ae663338ebfab4e70210abc4809",
+  "spend_micros": 1081,
+  "tier": "Cheap"
+}

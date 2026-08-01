@@ -1,0 +1,42 @@
+{
+  "catalog_version": "glance-catalog-001",
+  "context_blocks": [
+    {
+      "byte_size": 267,
+      "name": "Repository"
+    },
+    {
+      "byte_size": 377,
+      "name": "Navigation"
+    },
+    {
+      "byte_size": 1997,
+      "name": "File signatures"
+    },
+    {
+      "byte_size": 74661,
+      "name": "Root metadata"
+    },
+    {
+      "byte_size": 282771,
+      "name": "Child pages"
+    },
+    {
+      "byte_size": 251,
+      "name": "Root-only obligations"
+    }
+  ],
+  "degraded_children": [],
+  "directory": ".",
+  "input_tokens": 111089,
+  "kind": "root",
+  "metadata_notes": [],
+  "model": "openai/gpt-5.5-20260423",
+  "output_tokens": 3716,
+  "prompt_version": "glance-007-root-v1",
+  "provider": "openrouter",
+  "retries": 0,
+  "source_sha": "fb1486f210885ae663338ebfab4e70210abc4809",
+  "spend_micros": 666925,
+  "tier": "Frontier"
+}
