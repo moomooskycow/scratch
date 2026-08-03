@@ -18,3 +18,5 @@
 - **Resource cleanup**: Use `defer` for file handles and similar resources
 - **Docs**: Each function should have a comment describing purpose
 - **Dependencies**: Only use necessary external packages
+
+Organization root context: @~/Development/misty-step/AGENTS.md
