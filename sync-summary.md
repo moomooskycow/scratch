@@ -2,7 +2,7 @@
 
 ## Repository Context
 
-Detected languages: go
+Detected languages: go, ruby
 Detected contexts: all
 
 ## Index Regeneration
