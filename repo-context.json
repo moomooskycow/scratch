@@ -1,6 +1,7 @@
 {
   "languages": [
-    "go"
+    "go",
+    "ruby"
   ],
   "contexts": [
     "all"
