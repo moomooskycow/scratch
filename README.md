@@ -35,3 +35,6 @@ make check
 
 CI uses the same command in the `go check` job. The separate Leyline workflow
 only vendors shared docs; it does not replace the Go gate.
+
+`_leyline/` is a temporary, ignored Leyline workflow workspace; vendored docs
+remain under `docs/`.
