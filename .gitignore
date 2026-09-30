@@ -19,3 +19,6 @@ go.work.sum
 
 # environment files
 .env
+
+# temporary Leyline workflow checkout
+/_leyline/
